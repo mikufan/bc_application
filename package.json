@@ -1,0 +1,22 @@
+{
+  "name": "bc_application",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hello.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parse": "^5.0.3",
+    "csv-parser": "^3.0.0",
+    "csvtojson": "^2.0.10",
+    "fabric-ca-client": "^2.2.10",
+    "fabric-network": "^2.2.10",
+    "jquery-csv": "^1.0.21",
+    "js-yaml": "^4.1.0",
+    "parquetjs-lite": "^0.8.7"
+  }
+}
