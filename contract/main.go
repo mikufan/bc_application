@@ -13,7 +13,7 @@ import (
 
 func main() {
 
-	contract := new(chaindata.dataContract)
+	contract := new(chaindata.Contract)
 	contract.TransactionContextHandler = new(chaindata.TransactionContext)
 	contract.Name = "org.datanet.datacontract"
 	contract.Info.Version = "0.0.1"
