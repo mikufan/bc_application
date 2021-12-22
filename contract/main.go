@@ -7,8 +7,8 @@ package main
 import (
 	"fmt"
 
-	"./chaincode"
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
+	"github.com/mikufan/bc_application/contract/chaincode"
 )
 
 func main() {

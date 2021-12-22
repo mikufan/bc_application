@@ -1,4 +1,4 @@
-module github.com/hyperledger/fabric-samples/commercial-paper/organization/magnetocorp/contract-go
+module github.com/mikufan/bc_application/contract
 
 go 1.13
 
