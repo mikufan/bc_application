@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	ledgerapi "../ledger-api"
+	ledgerapi "github.com/mikufan/bc_application/contract/ledger-api"
 )
 
 // State enum for data state

@@ -1,6 +1,6 @@
 package chaindata
 
-import ledgerapi "../ledger-api"
+import ledgerapi "github.com/mikufan/bc_application/contract/ledger-api"
 
 // ListInterface defines functionality needed
 // to interact with the world state
