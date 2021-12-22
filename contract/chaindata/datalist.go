@@ -1,4 +1,4 @@
-package chaincode
+package chaindata
 
 import ledgerapi "../ledger-api"
 

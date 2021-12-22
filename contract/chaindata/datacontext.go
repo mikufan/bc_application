@@ -1,4 +1,4 @@
-package chaincode
+package chaindata
 
 import (
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"

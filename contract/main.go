@@ -8,13 +8,13 @@ import (
 	"fmt"
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
-	"github.com/mikufan/bc_application/contract/chaincode"
+	chaindata "github.com/mikufan/bc_application/contract/chaindata"
 )
 
 func main() {
 
-	contract := new(chaincode.dataContract)
-	contract.TransactionContextHandler = new(chaincode.TransactionContext)
+	contract := new(chaindata.dataContract)
+	contract.TransactionContextHandler = new(chaindata.TransactionContext)
 	contract.Name = "org.datanet.datacontract"
 	contract.Info.Version = "0.0.1"
 
