@@ -17,7 +17,7 @@ type StateListInterface interface {
 	AddState(StateInterface) error
 	GetState(string, StateInterface) error
 	UpdateState(StateInterface) error
-	RangeState(StateInterface,string,string) (shim.StateQueryIteratorInterface, error)
+	RangeState(string,string) (shim.StateQueryIteratorInterface, error)
 }
 
 // StateList useful for managing putting data in and out
@@ -62,7 +62,7 @@ func (sl *StateList) UpdateState(state StateInterface) error {
 	return sl.AddState(state)
 }
 
-func(sl *StateList) RangeState(state StateInterface,startKey string,endKey string) (shim.StateQueryIteratorInterface, error){
+func(sl *StateList) RangeState(startKey string,endKey string) (shim.StateQueryIteratorInterface, error){
 	iterator,err := sl.Ctx.GetStub().GetStateByRange(startKey,endKey)
 	return iterator,err
 }

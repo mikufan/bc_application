@@ -1,13 +1,16 @@
 package chaindata
 
-import ledgerapi "github.com/mikufan/bc_application/contract/ledger-api"
-
+import (
+	ledgerapi "github.com/mikufan/bc_application/contract/ledger-api"
+	"github.com/hyperledger/fabric-chaincode-go/shim"
+)
 // ListInterface defines functionality needed
 // to interact with the world state
 type ListInterface interface {
 	AddData(*DataItem) error
 	GetData(string, string) (*DataItem, error)
 	UpdateData(*DataItem) error
+	RangeData(string,string)
 }
 
 type list struct {
@@ -28,6 +31,11 @@ func (dtl *list) GetData(uploader string, dataTime string) (*DataItem, error) {
 	}
 
 	return dt, nil
+}
+
+func (dtl *list) RangeData(startKey string,endKey string)(shim.StateQueryIteratorInterface, error){
+	iterator,err := dtl.stateList.RangeState(startKey,endKey)
+	return iterator,err
 }
 
 func (tdl *list) UpdateData(data *DataItem) error {

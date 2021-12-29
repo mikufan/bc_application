@@ -36,10 +36,14 @@ func (c *Contract) Upload(ctx TransactionContextInterface,  dataTime string,data
 	return &data, nil
 }
 
-// func (c *Contract) DownloadAll(ctx TransactionContextInterface,uploader string, dataTime string, downloader string, downloadTime string) ([]*DataItem, error) {
-// 	data, err := ctx.GetDataList().GetData(uploader, dataTime)
-// 	return data, err
-// }
+func (c *Contract) DownloadAll(ctx TransactionContextInterface,uploader string, dataTime string, downloader string, downloadTime string) ([]*DataItem, error) {
+	resultsIterator, err := ctx.GetDataList().RangeData("", "")
+	if err != nil {
+		return nil, err
+	}
+	defer resultsIterator.Close()
+	
+}
 
 
 
