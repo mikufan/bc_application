@@ -20,7 +20,7 @@ type TransactionContext struct {
 	dataList *list
 }
 
-// GetPaperList return paper list
+// GetDataList return data list
 func (tc *TransactionContext) GetDataList() ListInterface {
 	if tc.dataList == nil {
 		tc.dataList = newList(tc)

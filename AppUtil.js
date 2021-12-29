@@ -1,17 +1,16 @@
-/*
- * Copyright IBM Corp. All Rights Reserved.
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
 'use strict';
 
 const fs = require('fs');
 const path = require('path');
 
-exports.buildCCPOrg1 = () => {
+exports.buildCCPOrg1 = (isMulti) => {
 	// load the common connection configuration file
-	const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+	var ccpPath = '';
+	if (isMulti == false){
+		ccpPath = path.resolve(__dirname, '..', '..','Github','fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+	}else{
+		ccpPath = path.resolve(__dirname, '..', '..', 'Github','fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+	}
 	const fileExists = fs.existsSync(ccpPath);
 	if (!fileExists) {
 		throw new Error(`no such file or directory: ${ccpPath}`);

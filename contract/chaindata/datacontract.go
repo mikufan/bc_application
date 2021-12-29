@@ -23,7 +23,7 @@ func (c *Contract) Instantiate() {
 }
 
 // Upload a new data item and stores it in the world state
-func (c *Contract) Upload(ctx TransactionContextInterface, uploader string, dataTime string) (*DataItem, error) {
+func (c *Contract) Upload(ctx TransactionContextInterface,  dataTime string,dataContent string, uploader string) (*DataItem, error) {
 	data := DataItem{DataTime: dataTime, Uploader: uploader}
 	data.SetUploaded()
 
@@ -35,6 +35,13 @@ func (c *Contract) Upload(ctx TransactionContextInterface, uploader string, data
 
 	return &data, nil
 }
+
+// func (c *Contract) DownloadAll(ctx TransactionContextInterface,uploader string, dataTime string, downloader string, downloadTime string) ([]*DataItem, error) {
+// 	data, err := ctx.GetDataList().GetData(uploader, dataTime)
+// 	return data, err
+// }
+
+
 
 // Download updates a data item status to be downloaded
 func (c *Contract) Download(ctx TransactionContextInterface, uploader string, dataTime string, downloader string, downloadTime string) (*DataItem, error) {
@@ -51,3 +58,5 @@ func (c *Contract) Download(ctx TransactionContextInterface, uploader string, da
 
 	return data, nil
 }
+
+

@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
+	"github.com/hyperledger/fabric-chaincode-go/shim"
 )
 
 // StateListInterface functions that a state list
@@ -16,6 +17,7 @@ type StateListInterface interface {
 	AddState(StateInterface) error
 	GetState(string, StateInterface) error
 	UpdateState(StateInterface) error
+	RangeState(StateInterface,string,string) (shim.StateQueryIteratorInterface, error)
 }
 
 // StateList useful for managing putting data in and out
@@ -58,4 +60,9 @@ func (sl *StateList) GetState(key string, state StateInterface) error {
 // separate as semantically different
 func (sl *StateList) UpdateState(state StateInterface) error {
 	return sl.AddState(state)
+}
+
+func(sl *StateList) RangeState(state StateInterface,startKey string,endKey string) (shim.StateQueryIteratorInterface, error){
+	iterator,err := sl.Ctx.GetStub().GetStateByRange(startKey,endKey)
+	return iterator,err
 }
