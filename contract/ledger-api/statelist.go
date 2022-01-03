@@ -64,5 +64,5 @@ func (sl *StateList) UpdateState(state StateInterface) error {
 
 func(sl *StateList) RangeState(startKey string,endKey string) (shim.StateQueryIteratorInterface, error){
 	iterator,err := sl.Ctx.GetStub().GetStateByRange(startKey,endKey)
-	return iterator,err
+	return iterator, err
 }

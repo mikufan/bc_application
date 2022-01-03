@@ -10,7 +10,7 @@ type ListInterface interface {
 	AddData(*DataItem) error
 	GetData(string, string) (*DataItem, error)
 	UpdateData(*DataItem) error
-	RangeData(string,string)
+	RangeData(string,string)(shim.StateQueryIteratorInterface, error)
 }
 
 type list struct {

@@ -67,6 +67,8 @@ async function main() {
 			const contract = network.getContract(chaincodeName);
       		console.log("chaincode loaded")
 			upload.uploadMain(jsonArray,contract,UserId)
+			//Download data on the blockchain
+			download.downloadMain()
 
 		} finally {
 			// Disconnect from the gateway when the application is closing

@@ -1,28 +1,21 @@
 'use strict';
 
-async function downloadMain(jsonArray,contract,UserId){
+async function downloadMain(){
   try{
-    console.log('Submit data upload transaction.');
-    for(var i=0;i<jsonArray.length;i++){
-        var oneData = jsonArray[i];
-        var dataTime = Object.values(oneData)[0];
-        console.log(Object.values(oneData)[0]);
-        await contract.submitTransaction('upload',dataTime,oneData,UserId);
-        //console.log('Process upload transaction response.'+uploadResponse.dataTime);
-        //console.log(`${uploadResponse.author} data : ${uploadResponse.dataTime} successfully uploaded`);
-        
-    }
-    console.log('Upload transaction complete.');
+    console.log('Submit data download transaction.');
+    await contract.evaluateTransaction('DownloadAll')
+    
+    console.log('Download transaction complete.');
     
   }catch(error) {
     console.log(`*** Successfully caught the error: \n    ${error}`);
   }
 }
 
-module.exports.uploadMain = uploadMain;
+module.exports.downloadMain = downloadMain;
 
 
 
-downloadMain()
+
 
 

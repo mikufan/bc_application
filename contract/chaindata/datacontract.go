@@ -5,6 +5,7 @@
 package chaindata
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
@@ -36,13 +37,30 @@ func (c *Contract) Upload(ctx TransactionContextInterface,  dataTime string,data
 	return &data, nil
 }
 
-func (c *Contract) DownloadAll(ctx TransactionContextInterface,uploader string, dataTime string, downloader string, downloadTime string) ([]*DataItem, error) {
+func (c *Contract) DownloadAll(ctx TransactionContextInterface) ([]*DataItem, error) {
 	resultsIterator, err := ctx.GetDataList().RangeData("", "")
 	if err != nil {
 		return nil, err
 	}
 	defer resultsIterator.Close()
-	
+
+	var dataItems []*DataItem
+
+	for resultsIterator.HasNext() {
+		queryResponse, err := resultsIterator.Next()
+		if err != nil {
+			return nil, err
+		}
+		var dataItem DataItem
+		dataItem.SetDownloaded()
+		err = json.Unmarshal(queryResponse.Value, &dataItem)
+		if err != nil {
+			return nil, err
+		}
+		dataItems = append(dataItems, &dataItem)
+
+	}
+	return dataItems, nil
 }
 
 
@@ -55,10 +73,6 @@ func (c *Contract) Download(ctx TransactionContextInterface, uploader string, da
 		return nil, err
 	}
 	data.SetDownloaded()
-
-	if err != nil {
-		return nil, err
-	}
 
 	return data, nil
 }
