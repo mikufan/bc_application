@@ -16,3 +16,4 @@
 .vscode/
 node_modules/
 contract/vendor/
+basic-contract/vendor/
