@@ -80,6 +80,34 @@ async function getQueryBlockInfo(blockId){
     //return blockId
 }
 
+async function getChainData(){
+    'use strict';
+    const { FileSystemWallet, Gateway } = require('fabric-network');
+    const path = require('path');
+    const ccpPath = path.resolve(__dirname, '..', '..', 'GitHub','fabric-samples','test-network','organizations', 'peerOrganizations','org1.example.com','connection-org1.json');
+    const walletPath = path.join(process.cwd(), 'wallet');
+    const wallet = new FileSystemWallet(walletPath);
+    const userExists = await wallet.exists('appuser');
+    console.log(`Wallet path: ${walletPath}`);
+    if (!userExists) {
+        console.log('An identity for the user "appuser" does not exist in the wallet');
+        console.log('Run the registerUser.js application before retrying');
+        return;
+    }
+    const gateway = new Gateway();
+    await gateway.connect(ccpPath, { wallet, identity: 'appuser', discovery: { enabled: true, asLocalhost: true } });
+
+    const network = await gateway.getNetwork('mychannel');
+    const contract = network.getContract('datacontract');
+    const result = await contract.evaluateTransaction('queryAllDataItems');
+    //console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+    console.log(result.toString());
+    var resultData = JSON.parse(result.toString())
+    console.log(resultData)
+    return resultData
+}
+
+module.exports.getChainData = getChainData
 module.exports.getQueryBlockInfo = getQueryBlockInfo
 module.exports.getBlockchainInfo = getBlockchainInfo
 module.exports.getNodeNumber = getNodeNumber

@@ -38,7 +38,7 @@ var server = app.listen(8081, function () {
 
 //获取区块链哈希值
 
-app.get('/getBlockQuery', function (req, res) {
+app.get('/getblockquery', function (req, res) {
   
     co( function * () {    
           
@@ -49,7 +49,19 @@ app.get('/getBlockQuery', function (req, res) {
     
         }).catch((err) => {
             res.send(err);
-        })
-    });
+    })
+});
+
+//获取当前所有链上数据
+app.get('/getchaindata', function(req, res){
+    co( function * () {    
+          
+        var chainData = yield fabric_application.getChainData();
+        res.send(chainData);
+    
+    }).catch((err) => {
+        res.send(err);
+    })
+});    
     
  
